@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import sio.paris2024.database.DaoPays;
+import sio.paris2024.model.Athlete;
 import sio.paris2024.model.Pays;
 
 /**
@@ -93,16 +94,16 @@ public class ServletPays extends HttpServlet {
 
            getServletContext().getRequestDispatcher("/vues/pays/listerPays.jsp").forward(request, response);
         }
-        /*
+        
         if(url.equals("/paris2024/ServletPays/consulter"))
         { 
             int idPays = Integer.parseInt((String)request.getParameter("idPays"));
-            Pays p = DaoPays.getPaysById(cnx, idPays);
-            request.setAttribute("pPays", p);
+            ArrayList<Athlete> lesAthletes = DaoPays.getLesAthletesPaysById(cnx, idPays);
+            request.setAttribute("pPays", lesAthletes);
             
            getServletContext().getRequestDispatcher("/vues/pays/consulterPays.jsp").forward(request, response);
         }
-        */
+        
         /*
           if(url.equals("/paris2024/ServletPays/ajouter"))
         {                   
