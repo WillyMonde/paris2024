@@ -14,12 +14,14 @@ public class Pays {
     private int id;
     private String nom ;
     private ArrayList<Athlete> lesAthletes ;
+    private String code ;
 
     public Pays() {
     }
 
-    public Pays(int id, String nom) {
+    public Pays(int id, String code, String nom) {
         this.id = id;
+        this.code = code;
         this.nom = nom;
     }
 
@@ -58,5 +60,14 @@ public class Pays {
         }
         lesAthletes.add(a);
     }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+    
     
 }

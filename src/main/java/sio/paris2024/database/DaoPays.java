@@ -9,9 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import static sio.paris2024.database.DaoAthlete.requeteSql;
-import static sio.paris2024.database.DaoAthlete.resultatRequete;
-import sio.paris2024.model.Athlete;
+import static sio.paris2024.database.DaoPays.requeteSql;
+import static sio.paris2024.database.DaoPays.resultatRequete;
 import sio.paris2024.model.Pays;
 
 /**
@@ -37,6 +36,7 @@ public class DaoPays {
                 Pays p = new Pays();
                 p.setId(resultatRequete.getInt("id"));
                 p.setNom(resultatRequete.getString("nom"));
+                p.setCode(resultatRequete.getString("code"));
                 
                 lesPays.add(p);
             }
@@ -44,7 +44,7 @@ public class DaoPays {
         }
         catch (SQLException e){
             e.printStackTrace();
-            System.out.println("La requête de getLespayss e généré une erreur");
+            System.out.println("La requête de getLespays e généré une erreur");
         }
         return lesPays;
         
