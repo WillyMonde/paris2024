@@ -34,7 +34,7 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a  href ='../ServletAthlete/lister' class="navbar-brand" href=".">Système de gestion des pays</a>
+				<a  href ='../ServletPays/lister' class="navbar-brand" href=".">Système de gestion des pays</a>
 			</div>
 		</div>
 	</nav>
@@ -43,7 +43,7 @@
             <h2 class="h2">Liste des pays</h2>
 		<div class="table-responsive">
                 <%
-                    ArrayList<Pay> lesPays = (ArrayList)request.getAttribute("pLesPays");
+                    ArrayList<Pays> lesPays = (ArrayList)request.getAttribute("pLesPays");
                 %>
                 <table class="table table-striped table-sm">  
                 <thead>
@@ -56,7 +56,7 @@
                 <tbody>
                     <tr>
                         <%
-                            for (Pay p : lesPays)
+                            for (Pays p : lesPays)
                             {              
                                 out.println("<tr><td>");
                                 out.println(p.getId());
@@ -66,7 +66,7 @@
                                 out.println(p.getCode());
                                 out.println("</td>");;
                                 
-                                out.println("<td><a href ='../ServletPay/consulter?idPay="+ p.getId()+ "'>");
+                                out.println("<td><a href ='../ServletPays/consulter?idPays="+ p.getId()+ "'>");
                                 out.println(p.getNom());
                                 out.println("</td>");;
            

@@ -23,8 +23,8 @@
         <url-pattern>/ServletAthlete/ajouter</url-pattern>
     </servlet-mapping>
         <servlet-mapping>
-        <servlet-name>ServletPay</servlet-name>
-        <url-pattern>/ServletPay/lister</url-pattern>
+        <servlet-name>ServletPays</servlet-name>
+        <url-pattern>/ServletPays/lister</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

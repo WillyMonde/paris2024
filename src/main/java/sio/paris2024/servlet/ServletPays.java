@@ -16,13 +16,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import sio.paris2024.database.DaoPays;
+import sio.paris2024.model.Pays;
 
 /**
  *
  * @author SIO2
  */
-@WebServlet(name = "ServletPay", urlPatterns = {"/ServletPay"})
-public class ServletPay extends HttpServlet {
+@WebServlet(name = "ServletPays", urlPatterns = {"/ServletPays"})
+public class ServletPays extends HttpServlet {
     
     Connection cnx ;
             
@@ -37,7 +40,7 @@ public class ServletPay extends HttpServlet {
         try {
             System.out.println("INIT SERVLET=" + cnx.getSchema());
         } catch (SQLException ex) {
-            Logger.getLogger(ServletPay.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletPays.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -58,10 +61,10 @@ public class ServletPay extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletPay</title>");            
+            out.println("<title>Servlet ServletPays</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletPay at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServletPays at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -79,31 +82,36 @@ public class ServletPay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String url = request.getRequestURI();  
+       
+        // Récup et affichage les payss 
+        if(url.equals("/paris2024/ServletPays/lister"))
+        {              
+            ArrayList<Pays> lesPays = DaoPays.getLesPays(cnx);
+            request.setAttribute("pLesPays", lesPays);
+
+           getServletContext().getRequestDispatcher("/vues/pays/listerPays.jsp").forward(request, response);
+        }
+        /*
+        if(url.equals("/paris2024/ServletPays/consulter"))
+        { 
+            int idPays = Integer.parseInt((String)request.getParameter("idPays"));
+            Pays p = DaoPays.getPaysById(cnx, idPays);
+            request.setAttribute("pPays", p);
+            
+           getServletContext().getRequestDispatcher("/vues/pays/consulterPays.jsp").forward(request, response);
+        }
+        */
+        /*
+          if(url.equals("/paris2024/ServletPays/ajouter"))
+        {                   
+            ArrayList<Pays> lesPayss = DaoPays.getLesPayss(cnx);
+            request.setAttribute("pLesPayss", lesPayss);
+            this.getServletContext().getRequestDispatcher("/vues/pays/ajouterPayss.jsp" ).forward( request, response );
+        }
+        */
+        
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+      
 }
