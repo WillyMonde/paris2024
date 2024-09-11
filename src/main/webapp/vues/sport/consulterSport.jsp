@@ -1,12 +1,12 @@
 <%-- 
-    Document   : listerSport
-    Created on : 11 sept. 2024, 08:52:18
+    Document   : consulterSport
+    Created on : 11 sept. 2024, 09:36:52
     Author     : SIO2
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sio.paris2024.model.Athlete"%>
-<%@page import="sio.paris2024.model.Sport"%>
+<%@page import="sio.paris2024.model.Pays"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
@@ -34,37 +34,41 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a  href ='../ServletPays/lister' class="navbar-brand" href=".">Système de gestion des sports</a>
+				<a  href ='../ServletSport/lister' class="navbar-brand" href=".">Système de gestion des sport</a>
 			</div>
 		</div>
 	</nav>
     <body>
        <div class="container special">
-            <h2 class="h2">Liste des sports</h2>
+            <h2 class="h2">Liste des athletes de ce sport</h2>
 		<div class="table-responsive">
                 <%
-                    ArrayList<Sport> lesSports = (ArrayList)request.getAttribute("sLesSports");
-                %>
+                    ArrayList<Athlete> lesAthletes = (ArrayList)request.getAttribute("sSport");
+                %> 
                 <table class="table table-striped table-sm">  
                 <thead>
                     <tr>             
                         <th>id</th>
-                        <th>nom</th>              
+                        <th>nom</th>
+                        <th>prenom</th>              
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <%
-                            for (Sport s : lesSports)
+                            for (Athlete a : lesAthletes)
                             {              
                                 out.println("<tr><td>");
-                                out.println(s.getId());
+                                out.println(a.getId());
                                 out.println("</td>");
                                 
-                                out.println("<td><a href ='../ServletSport/consulter?idSport="+ s.getId()+ "'>");
-                                out.println(s.getNom());
+                                out.println("<td>");
+                                out.println(a.getNom());
                                 out.println("</td>");;
            
+                                out.println("<td>");
+                                out.println(a.getPrenom());
+                                out.println("</td>");;
                             }
                         %>
                     </tr>
