@@ -40,7 +40,7 @@
 	</nav>
     <body>
        <div class="container special">
-            <h2 class="h2">Consulter des sports</h2>
+            <h2 class="h2">Liste des athletes de ce sport</h2>
 		<div class="table-responsive">
                 <%
                     ArrayList<Athlete> lesAthletes = (ArrayList)request.getAttribute("sSport");
