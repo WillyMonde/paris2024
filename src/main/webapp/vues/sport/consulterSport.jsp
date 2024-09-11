@@ -36,9 +36,6 @@
             <h2 class="h2">Liste des athlètes de ce sport</h2>
             <div class="table-responsive">
                 <%
-                    // Récupération de l'objet Sport
-                    Sport sSport = (Sport) request.getAttribute("sSport");
-                    // Récupération de la liste des athlètes
                     ArrayList<Athlete> lesAthletes = (ArrayList<Athlete>) request.getAttribute("lesAthletes");
                 %> 
                 
@@ -53,7 +50,6 @@
                     <tbody>
                         <%
                             if (lesAthletes != null && !lesAthletes.isEmpty()) {
-                                // Boucle pour afficher les athlètes
                                 for (Athlete a : lesAthletes) {              
                                     out.println("<tr><td>" + a.getId() + "</td>");
                                     out.println("<td>" + a.getNom() + "</td>");
