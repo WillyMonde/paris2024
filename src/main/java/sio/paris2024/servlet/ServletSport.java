@@ -100,9 +100,9 @@ public class ServletSport extends HttpServlet {
         { 
             int idSport = Integer.parseInt((String)request.getParameter("idSport"));
             ArrayList<Athlete> lesAthletes = DaoSport.getLesAthletesSportById(cnx, idSport);
-            request.setAttribute("sSport", lesAthletes);
+            request.setAttribute("lesAthletes", lesAthletes);
             
-           getServletContext().getRequestDispatcher("/vues/sport/consulterSport.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/vues/sport/consulterSport.jsp").forward(request, response);
         }
         
         
