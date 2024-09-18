@@ -49,7 +49,8 @@
                         <tr>             
                             <th>id</th>
                             <th>date de naissance</th>
-                            <th>pays</th>     
+                            <th>pays</th>  
+                            <th>sport</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,6 +58,7 @@
                             <td><%  out.println(a.getId());%></td>
                             <td><%  out.println(a.getDatenaiss());%></td>
                             <td><%  out.println(a.getPays().getNom());%></td>
+                            <td><%  out.println(a.getSport().getNom());%></td>
                         </tr>
                     </tbody>
         </table>

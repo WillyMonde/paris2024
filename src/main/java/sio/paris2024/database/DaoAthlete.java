@@ -9,9 +9,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import sio.paris2024.model.Athlete;
 import sio.paris2024.model.Pays;
+import sio.paris2024.model.Sport;
 
 /**
  *
@@ -64,9 +66,11 @@ public class DaoAthlete {
         
         Athlete a = new Athlete();
         try{
-            requeteSql = cnx.prepareStatement("select a.id as a_id, a.nom as a_nom, a.prenom as a_prenom, a.datenaiss as a_datenaiss,  p.id as p_id, p.nom as p_nom " +
+            requeteSql = cnx.prepareStatement("select a.id as a_id, a.nom as a_nom, a.prenom as a_prenom, a.datenaiss as a_datenaiss,  p.id as p_id, p.nom as p_nom, s.id as s_id, s.nom as s_nom " +
                          " from athlete a inner join pays p " +
-                         " on a.pays_id = p.id " + 
+                         " on a.pays_id = p.id " +
+                         " inner join sport s " +
+                         " on a.sport_id = s.id " + 
                          " where a.id = ? ");
             //System.out.println("REQ="+ requeteSql);
             requeteSql.setInt(1, idAthlete);
@@ -84,8 +88,14 @@ public class DaoAthlete {
                    Pays p = new Pays();
                    p.setId(resultatRequete.getInt("p_id"));
                    p.setNom(resultatRequete.getString("p_nom"));
+                   
+                   a.setPays(p);
                 
-                    a.setPays(p);
+                   Sport s = new Sport();
+                   s.setId(resultatRequete.getInt("s_id"));
+                   s.setNom(resultatRequete.getString("s_nom"));
+
+                   a.setSport(s);
                 
             }
            
@@ -105,10 +115,15 @@ public class DaoAthlete {
             // id (clé primaire de la table athlete) est en auto_increment,donc on ne renseigne pas cette valeur
             // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
             // supprimer ce paramètre en cas de requête sans auto_increment.
-            requeteSql=connection.prepareStatement("INSERT INTO athlete (nom, pays_id)\n" +
-                    "VALUES (?,?)", requeteSql.RETURN_GENERATED_KEYS );
+            requeteSql=connection.prepareStatement("INSERT INTO athlete (nom, prenom, datenaiss, pays_id, sport_id)\n" +
+                    "VALUES (?,?,?,?,?)", requeteSql.RETURN_GENERATED_KEYS );
             requeteSql.setString(1, ath.getNom());      
-            requeteSql.setInt(2, ath.getPays().getId());
+            requeteSql.setString(2, ath.getPrenom()); 
+            LocalDate dateNaissance = ath.getDatenaiss();
+            Date datenaiss = Date.valueOf(dateNaissance);
+            requeteSql.setDate(3,datenaiss);   
+            requeteSql.setInt(4, ath.getPays().getId());
+            requeteSql.setInt(5, ath.getSport().getId());
 
            /* Exécution de la requête */
             requeteSql.executeUpdate();

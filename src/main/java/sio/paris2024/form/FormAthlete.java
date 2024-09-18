@@ -5,10 +5,12 @@
 package sio.paris2024.form;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import sio.paris2024.model.Athlete;
 import sio.paris2024.model.Pays;
+import sio.paris2024.model.Sport;
 
 /**
  *
@@ -61,7 +63,46 @@ public class FormAthlete {
         Athlete ath  = new Athlete();
          
         String nom = getDataForm( request, "nom" );
-        int idPays = Integer.parseInt((String)getDataForm( request, "idPays" ));
+        String prenom = getDataForm(request, "prenom");
+
+        String dateNaissanceStr = getDataForm(request, "dateNaiss");
+        LocalDate dateNaissance = null;
+
+        if (dateNaissanceStr != null && !dateNaissanceStr.isEmpty()) {
+            try {
+                dateNaissance = LocalDate.parse(dateNaissanceStr);
+            } catch (Exception e) {
+                setErreur("dateNaiss", "La date de naissance est invalide.");
+            }
+        } else {
+            setErreur("dateNaiss", "Veuillez renseigner une date de naissance.");
+        }
+
+        // Vérification pour idPays
+        String idPaysStr = getDataForm(request, "idPays");
+        int idPays = 0; // Valeur par défaut, si nécessaire
+        if (idPaysStr != null && !idPaysStr.isEmpty()) {
+            try {
+                idPays = Integer.parseInt(idPaysStr);
+            } catch (NumberFormatException e) {
+                setErreur("idPays", "Le pays sélectionné est invalide.");
+            }
+        } else {
+            setErreur("idPays", "Veuillez sélectionner un pays.");
+        }
+
+        // Vérification pour idSport
+        String idSportStr = getDataForm(request, "idSport");
+        int idSport = 0; // Valeur par défaut, si nécessaire
+        if (idSportStr != null && !idSportStr.isEmpty()) {
+            try {
+                idSport = Integer.parseInt(idSportStr);
+            } catch (NumberFormatException e) {
+                setErreur("idSport", "Le sport sélectionné est invalide.");
+            }
+        } else {
+            setErreur("idSport", "Veuillez sélectionner un sport.");
+        }
        
       
         try {
@@ -70,6 +111,8 @@ public class FormAthlete {
             setErreur( "nom", e.getMessage() );
         }
         ath.setNom(nom);
+        ath.setPrenom(prenom);
+        ath.setDatenaiss(dateNaissance);
 
         if ( erreurs.isEmpty() ) {
             resultat = "Succès de l'ajout.";
@@ -81,6 +124,9 @@ public class FormAthlete {
      
         Pays p = new Pays(idPays);
         ath.setPays(p);
+        
+        Sport s = new Sport(idSport);
+        ath.setSport(s);
         
         return ath ;
     }
