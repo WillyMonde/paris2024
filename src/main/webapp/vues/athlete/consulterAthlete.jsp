@@ -36,27 +36,29 @@
                 </div>
             </div>
         </nav>
-        
-        <div class="container special">
-            <h2 class="h2">Liste des athlètes de ce sport</h2>
-            <div class="table-responsive">
-                <%
+          <%
                 Athlete a = (Athlete)request.getAttribute("pAthlete");
         %> 
+        <div class="container special">
+            <h2 class="h2"><%  out.println(a.getNom());%> <%  out.println(a.getPrenom());%></h2>
+            <div class="table-responsive">
+             
                 
                 <table class="table table-striped table-sm">  
                     <thead>
                         <tr>             
                             <th>id</th>
+                            <th>date de naissance</th>
                             <th>pays</th>     
                         </tr>
                     </thead>
-                    <tr>
-                <td>Id: </td><td><%  out.println(a.getId());%></td>
-            </tr>
-            <tr>
-                <td>Pays : </td><td><%  out.println(a.getPays().getNom());%></td>
-            </tr>
+                    <tbody>
+                        <tr>
+                            <td><%  out.println(a.getId());%></td>
+                            <td><%  out.println(a.getDatenaiss());%></td>
+                            <td><%  out.println(a.getPays().getNom());%></td>
+                        </tr>
+                    </tbody>
         </table>
             </div>
         </div>
