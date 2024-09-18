@@ -8,6 +8,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="sio.paris2024.model.Pays"%>
 <%@page import="sio.paris2024.model.Athlete"%>
+<%@page import="sio.paris2024.model.Sport"%>
 <%@page import="sio.paris2024.form.FormAthlete"%>
 <!DOCTYPE html>
 <html>
@@ -49,12 +50,17 @@
         
         <form class="form-inline" action="ajouter" method="POST">
                 <label for="nom">NOM : </label>
-                <input id="nom" type="text" name="nom"  size="30" maxlength="30">
+                <input id="nom" type="text" name="nom"  size="30" maxlength="30" required> 
                 </br>
+                 <label for="prenom">PRENOM : </label>
+                <input id="prenom" type="text" name="prenom"  size="30" maxlength="30" required>
+                </br>
+                <label for="dateNaiss">DATE DE NAISSANCE : </label>
+                <input id="dateNaiss" type="date" name="dateNaiss"  size="30" maxlength="30" required>
                             
                 <%-- Champ Liste des pays --%>
                 <label for="pays">Pays : </label>
-                <select name="idPays">
+                <select name="idPays" required>
                     <%
                         ArrayList<Pays> lesPays= (ArrayList)request.getAttribute("pLesPays");
                         for (int i=0; i<lesPays.size();i++){
@@ -63,7 +69,19 @@
                         }
                     %>
                 </select>
-                </br>            
+                </br>        
+                
+                <label for="sports">Sports : </label>
+                <select name="idSport" required>
+                    <%
+                        ArrayList<Sport> lesSports= (ArrayList)request.getAttribute("sLesSports");
+                        for (int i=0; i<lesSports.size();i++){
+                            Sport s = lesSports.get(i);
+                            out.println("<option value='" + s.getId()+"'>" + s.getNom()+"</option>" );
+                        }
+                    %>
+                </select>
+                </br>        
                                
             <input type="submit" name="valider" id="valider" value="Valider"/>
             </form>
