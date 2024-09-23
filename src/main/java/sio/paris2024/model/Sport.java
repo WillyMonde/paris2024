@@ -14,7 +14,6 @@ public class Sport {
     private int id;
     private String nom ;
     private ArrayList<Athlete> lesAthletes ;
-    private Athlete athlete;
 
     public Sport() {
     }
@@ -22,7 +21,6 @@ public class Sport {
     public Sport(int id, String nom, Athlete athlete) {
         this.id = id;
         this.nom = nom;
-        this.athlete = athlete;
     }
 
     public Sport(int id) {
@@ -60,14 +58,4 @@ public class Sport {
         }
         lesAthletes.add(a);
     }
-
-    public Athlete getAthlete() {
-        return athlete;
-    }
-
-    public void setAthlete(Athlete athlete) {
-        this.athlete = athlete;
-    }
-    
-    
 }
