@@ -33,11 +33,13 @@
         </nav>
         
         <div class="container special">
-            <h2 class="h2">Liste des athlètes de ce sport</h2>
-            <div class="table-responsive">
                 <%
                     ArrayList<Athlete> lesAthletes = (ArrayList<Athlete>) request.getAttribute("lesAthletes");
+                    
+                    Sport s = (Sport)request.getAttribute("Sport");
                 %> 
+            <h2 class="h2"><%  out.println(s.getNom());%></h2>
+            <div class="table-responsive">
                 
                 <table class="table table-striped table-sm">  
                     <thead>
