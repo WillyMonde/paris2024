@@ -102,6 +102,9 @@ public class ServletSport extends HttpServlet {
             ArrayList<Athlete> lesAthletes = DaoSport.getLesAthletesSportById(cnx, idSport);
             request.setAttribute("lesAthletes", lesAthletes);
             
+            Sport s = DaoSport.getSportById(cnx, idSport);
+            request.setAttribute("Sport", s);
+            
             this.getServletContext().getRequestDispatcher("/vues/sport/consulterSport.jsp").forward(request, response);
         }
         
@@ -110,6 +113,7 @@ public class ServletSport extends HttpServlet {
         {                   
             ArrayList<Sport> lesSports = DaoSport.getLesSports(cnx);
             request.setAttribute("sLesSports", lesSports);
+            
             this.getServletContext().getRequestDispatcher("/vues/sport/ajouterSport.jsp" ).forward( request, response );
         }
         
@@ -142,10 +146,11 @@ public class ServletSport extends HttpServlet {
             Sport sportInsere =  DaoSport.addSport(cnx, spo);
             if (sportInsere != null ){
                 request.setAttribute( "sSport", sportInsere );
-                this.getServletContext().getRequestDispatcher("/vues/sport/consulterSport.jsp" ).forward( request, response );
+                response.sendRedirect(request.getContextPath() + "/ServletSport/consulter?idSport=" + sportInsere.getId());
             }
             else 
             {
+                this.getServletContext().getRequestDispatcher("/vues/sport/ajouterSport.jsp").forward(request, response);
                 // Cas oùl'insertion en bdd a échoué
                 //renvoyer vers une page d'erreur 
             }
