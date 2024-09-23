@@ -101,6 +101,9 @@ public class ServletPays extends HttpServlet {
             ArrayList<Athlete> lesAthletes = DaoPays.getLesAthletesPaysById(cnx, idPays);
             request.setAttribute("pPays", lesAthletes);
             
+            Pays p = DaoPays.getPaysById(cnx, idPays);
+            request.setAttribute("Pays", p);
+            
            getServletContext().getRequestDispatcher("/vues/pays/consulterPays.jsp").forward(request, response);
         }
         

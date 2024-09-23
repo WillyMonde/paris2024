@@ -39,11 +39,15 @@
 	</nav>
     <body>
        <div class="container special">
-            <h2 class="h2">Consulter des pays</h2>
-		<div class="table-responsive">
                 <%
                     ArrayList<Athlete> lesAthletes = (ArrayList)request.getAttribute("pPays");
+                    
+                    Pays p = (Pays)request.getAttribute("Pays");
+                    
                 %> 
+            <h2 class="h2"><%  out.println(p.getNom());%></h2>
+		<div class="table-responsive">
+
                 <table class="table table-striped table-sm">  
                 <thead>
                     <tr>             
