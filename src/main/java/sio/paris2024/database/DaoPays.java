@@ -82,4 +82,31 @@ public class DaoPays {
         }
         return lesAthletes;
     }
+        
+        
+    public static Pays getPaysById(Connection cnx, int idPays){
+        
+        Pays p = new Pays();
+        try{
+            requeteSql = cnx.prepareStatement("select p.id as p_id, p.nom as p_nom " +
+                         " from pays p" + 
+                         " where p.id = ? ");
+            //System.out.println("REQ="+ requeteSql);
+            requeteSql.setInt(1, idPays);
+            resultatRequete = requeteSql.executeQuery();
+            
+            if (resultatRequete.next()){
+                
+                   p.setId(resultatRequete.getInt("p_id"));
+                   p.setNom(resultatRequete.getString("p_nom"));
+
+            }
+           
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            System.out.println("La requête de getPaysById e généré une erreur");
+        }
+        return p;
+    }
 }
