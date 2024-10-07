@@ -19,7 +19,7 @@ public class Pays {
     public Pays() {
     }
 
-    public Pays(int id, String code, String nom, Athlete athlete) {
+    public Pays(int id, String code, String nom) {
         this.id = id;
         this.code = code;
         this.nom = nom;
