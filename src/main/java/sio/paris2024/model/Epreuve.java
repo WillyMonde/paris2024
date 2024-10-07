@@ -10,9 +10,13 @@ import java.util.ArrayList;
 public class Epreuve {
     private int id;
     private String nom ;
-    private ArrayList<Athlete> NbAthletes ;
+    private ArrayList<Athlete> lesAthletes ;
+
+    public Epreuve() {
+    }
     
- public Epreuve(int id, String nom) {
+    
+    public Epreuve(int id, String nom) {
         this.id = id;
         this.nom = nom;
     }
@@ -32,19 +36,25 @@ public class Epreuve {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
-    public ArrayList<Athlete> getNbAthletes() {
-        return NbAthletes;
+
+    public ArrayList<Athlete> getLesAthletes() {
+        return lesAthletes;
     }
 
-    public void setLesAthletes(ArrayList<Athlete> NbAthletes) {
-        this.NbAthletes = NbAthletes;
+    public void setLesAthletes(ArrayList<Athlete> lesAthletes) {
+        this.lesAthletes = lesAthletes;
     }
+    
+   
     public void addAthlete(Athlete a){
         
-        if (NbAthletes == null){
-            NbAthletes = new ArrayList<Athlete>();
+        if (lesAthletes == null){
+            lesAthletes = new ArrayList<Athlete>();
         }
-        NbAthletes.add(a);
+        lesAthletes.add(a);
+    }
+    
+    public int getNbAthletes(){
+        return lesAthletes.size();
     }
 }
