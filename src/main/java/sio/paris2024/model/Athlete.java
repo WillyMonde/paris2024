@@ -5,6 +5,7 @@
 package sio.paris2024.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,6 +19,8 @@ public class Athlete {
     private LocalDate datenaiss;
     private Pays pays ;
     private Sport sport;
+    private ArrayList<Epreuve> lesEpreuves ;
+
     public Athlete() {
     }
 
@@ -75,5 +78,23 @@ public class Athlete {
     public void setSport(Sport sport) {
         this.sport = sport;
     }
-     
+    
+     public ArrayList<Epreuve> getLesEpreuves() {
+        return lesEpreuves;
+    }
+
+    public void setLesEpreuves(ArrayList<Epreuve> lesEpreuves){
+        this.lesEpreuves = lesEpreuves;
+    }
+   
+    public void addEpreuve(Epreuve e){
+        
+        if (lesEpreuves == null){
+            lesEpreuves = new ArrayList<Epreuve>();
+        }
+        lesEpreuves.add(e);
+    }
+    public int getNbEpreuves(){
+        return lesEpreuves.size();
+    }
 }
